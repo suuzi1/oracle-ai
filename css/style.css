@@ -375,3 +375,49 @@ footer {
     grid-template-columns: 1fr;
   }
 }
+
+
+/* AI鑑定エリア */
+.ai-reading-card {
+  margin-top: 25px;
+  padding: 25px;
+  border: 1px solid rgba(218, 180, 105, 0.5);
+  border-radius: 18px;
+  background: linear-gradient(145deg, #211936, #151020);
+  color: #f5edf9;
+  text-align: left;
+  line-height: 1.9;
+}
+
+.ai-reading-card h3 {
+  color: #e8c982;
+  margin-bottom: 15px;
+}
+
+.ai-reading-text {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  line-height: 2;
+  font-size: 15px;
+}
+
+.ai-loading {
+  color: #e8c982;
+  text-align: center;
+  font-size: 24px;
+  padding: 15px;
+  animation: oracle-glow 1.5s ease-in-out infinite alternate;
+}
+
+.ai-error {
+  border-color: rgba(220, 120, 120, 0.5);
+}
+
+@keyframes oracle-glow {
+  from {
+    opacity: 0.4;
+  }
+  to {
+    opacity: 1;
+  }
+}
