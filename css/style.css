@@ -272,3 +272,106 @@ footer {
   font-family: inherit;
   cursor: pointer;
 }
+
+
+/* 占い方法の選択 */
+.spread-options {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.spread-button {
+  padding: 22px 12px;
+  border: 1px solid #c5a45c;
+  border-radius: 14px;
+  background: linear-gradient(145deg, #302044, #171125);
+  color: #f8df9b;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.spread-button:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 18px rgba(218, 177, 91, 0.3);
+}
+
+.spread-button strong,
+.spread-button span {
+  display: block;
+}
+
+.spread-button strong {
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.spread-button span {
+  font-size: 13px;
+}
+
+/* 占い結果 */
+.spread-description {
+  color: #d6c4a1;
+  margin-bottom: 20px;
+}
+
+.reading-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 15px;
+  margin: 24px 0;
+}
+
+.reading-card {
+  padding: 20px 15px;
+  border: 1px solid rgba(197, 164, 92, 0.65);
+  border-radius: 14px;
+  background: rgba(30, 20, 48, 0.85);
+}
+
+.reading-position {
+  color: #e8c77e;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.reading-card h3 {
+  color: #f5d58d;
+  margin: 12px 0;
+}
+
+.reading-card .tarot-symbol {
+  font-size: 30px;
+  color: #e8c77e;
+}
+
+.reading-card .tarot-symbol.is-reversed {
+  transform: rotate(180deg);
+}
+
+.reading-card .result-meaning {
+  line-height: 1.9;
+}
+
+.back-button {
+  display: block;
+  margin: 15px auto 0;
+  padding: 10px 20px;
+  border: 1px solid #bca16a;
+  border-radius: 25px;
+  background: transparent;
+  color: #e8d5ad;
+  cursor: pointer;
+}
+
+@media (max-width: 650px) {
+  .spread-options {
+    grid-template-columns: 1fr;
+  }
+
+  .reading-cards {
+    grid-template-columns: 1fr;
+  }
+}
