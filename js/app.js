@@ -3,6 +3,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const cards = document.querySelectorAll(".fortune-card");
   const message = document.getElementById("selection-message");
 
+  // Cloudflare Workerの接続先
+  const AI_API_URL = "https://oracle-ai-api.murata08301.workers.dev/";
+
   const fortuneTypes = {
     love: "恋愛運",
     work: "仕事運",
@@ -24,7 +27,13 @@ document.addEventListener("DOMContentLoaded", () => {
     5: {
       name: "5枚引き",
       description: "より詳しい運勢",
-      positions: ["現在の状況", "あなたの課題", "周囲の影響", "アドバイス", "これからの未来"]
+      positions: [
+        "現在の状況",
+        "あなたの課題",
+        "周囲の影響",
+        "アドバイス",
+        "これからの未来"
+      ]
     }
   };
 
@@ -88,8 +97,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     message.querySelectorAll(".spread-button").forEach(button => {
       button.addEventListener("click", () => {
-        const count = Number(button.dataset.spread);
-        drawFortune(type, count);
+        drawFortune(type, Number(button.dataset.spread));
       });
     });
 
@@ -97,6 +105,83 @@ document.addEventListener("DOMContentLoaded", () => {
       behavior: "smooth",
       block: "center"
     });
+  }
+
+  // Gemini AIに鑑定を依頼
+  async function requestAI(type, results) {
+    const aiArea = document.getElementById("ai-reading");
+
+    if (!aiArea) return;
+
+    aiArea.innerHTML = `
+      <div class="ai-reading-card">
+        <p class="eyebrow">ORACLE AI</p>
+        <h3>✨ あなたの運命を読み解いています</h3>
+        <p>カードの意味を組み合わせて、AIが鑑定しています。</p>
+        <div class="ai-loading">✦　✧　✦</div>
+      </div>
+    `;
+
+    try {
+      const response = await fetch(AI_API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          category: type,
+          cards: results.map(result => ({
+            name: result.name,
+            position: result.position,
+            reversed: result.reversed
+          }))
+        })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "AI鑑定に失敗しました。");
+      }
+
+      if (!data.reading) {
+        throw new Error("鑑定結果を取得できませんでした。");
+      }
+
+      // AIの文章はHTMLとして扱わず安全に表示
+      aiArea.innerHTML = `
+        <div class="ai-reading-card">
+          <p class="eyebrow">ORACLE AI MESSAGE</p>
+          <h3>✨ AIからの鑑定メッセージ</h3>
+          <div id="ai-reading-text" class="ai-reading-text"></div>
+        </div>
+      `;
+
+      document.getElementById("ai-reading-text").textContent =
+        data.reading;
+
+    } catch (error) {
+      console.error("AI鑑定エラー:", error);
+
+      aiArea.innerHTML = `
+        <div class="ai-reading-card ai-error">
+          <p class="eyebrow">ORACLE AI</p>
+          <h3>AI鑑定を取得できませんでした</h3>
+          <p id="ai-error-message"></p>
+          <button id="ai-retry-button" class="start-button" type="button">
+            AI鑑定をもう一度試す
+          </button>
+        </div>
+      `;
+
+      document.getElementById("ai-error-message").textContent =
+        error.message;
+
+      document.getElementById("ai-retry-button")
+        .addEventListener("click", () => {
+          requestAI(type, results);
+        });
+    }
   }
 
   // カードを引く
@@ -170,6 +255,12 @@ document.addEventListener("DOMContentLoaded", () => {
             ${resultHTML}
           </div>
 
+          <div id="ai-reading">
+            <div class="ai-reading-card">
+              <p>AI鑑定を準備しています...</p>
+            </div>
+          </div>
+
           <button id="retry-button" class="start-button" type="button">
             もう一度占う
           </button>
@@ -194,6 +285,9 @@ document.addEventListener("DOMContentLoaded", () => {
         behavior: "smooth",
         block: "center"
       });
+
+      // カード表示後にAI鑑定を開始
+      requestAI(type, results);
 
     } catch (error) {
       console.error("占いエラー:", error);
