@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -6,45 +5,59 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#100d20">
   <title>タロットカード一覧｜ORACLE AI</title>
-  <meta name="description" content="タロットカード78枚の意味と象徴を紹介します。">
+  <meta name="description" content="タロットカード全78枚の一覧。大アルカナ22枚は、正位置・逆位置、恋愛・仕事・金運での意味を1枚ずつ詳しく解説しています。">
   <link rel="stylesheet" href="css/style.css">
   <style>
     .info-page {
-      max-width: 1000px;
+      max-width: 850px;
       margin: 50px auto;
       padding: 25px;
       color: #f5edf9;
-      line-height: 1.9;
+      line-height: 2;
     }
     .info-page h1,
     .info-page h2 {
       color: #e8c982;
+    }
+    .info-page h1 {
       text-align: center;
+      margin-bottom: 35px;
     }
-    .card-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-      gap: 15px;
-      margin: 25px 0 45px;
+    .info-page h2 {
+      margin-top: 40px;
+      font-size: 1.25rem;
     }
-    .tarot-item {
-      padding: 18px;
-      border: 1px solid rgba(218,180,105,.35);
-      border-radius: 14px;
-      background: linear-gradient(145deg,#211936,#151020);
+    .info-page p {
+      margin: 12px 0;
     }
-    .tarot-item strong {
-      display: block;
+    .card-list {
+      list-style: none;
+      padding: 0;
+      margin: 20px 0;
+    }
+    .card-list li {
+      border-bottom: 1px solid rgba(218,180,105,.25);
+      padding: 10px 4px;
+    }
+    .card-list a {
+      color: #f5edf9;
+      text-decoration: none;
+    }
+    .card-list a:hover {
       color: #e8c982;
-      font-size: 1.05rem;
-      margin-bottom: 6px;
     }
-    .tarot-item small {
-      color: #d1c4df;
+    .card-list .card-name {
+      color: #e8c982;
+      font-weight: bold;
+    }
+    .card-list .card-kw {
+      color: #9a93b8;
+      font-size: 0.9rem;
+      margin-left: 12px;
     }
     .page-back {
       display: inline-block;
-      margin-top: 25px;
+      margin-top: 30px;
       color: #e8c982;
       text-decoration: none;
     }
@@ -61,71 +74,52 @@
   </header>
 
   <main class="info-page">
-    <p class="eyebrow" style="text-align:center;">TAROT CARD LIBRARY</p>
+    <p class="eyebrow">TAROT CARD LIBRARY</p>
     <h1>タロットカード一覧</h1>
 
-    <p style="text-align:center;">
+    <p>
       タロットカードは全部で78枚。
       それぞれのカードには、さまざまな象徴や意味が込められています。
+      大アルカナ22枚は、カード名を押すと、正位置・逆位置、恋愛・仕事・金運での意味を詳しく読めます。
     </p>
 
     <h2>大アルカナ｜22枚</h2>
-    <p style="text-align:center;">
-      人生の大きな転機や、心の成長を象徴する22枚です。
-    </p>
-
-    <div class="card-grid">
-      <div class="tarot-item"><strong>0. 愚者</strong><small>自由・冒険・新しい始まり</small></div>
-      <div class="tarot-item"><strong>I. 魔術師</strong><small>創造・才能・行動力</small></div>
-      <div class="tarot-item"><strong>II. 女教皇</strong><small>直感・知性・内面</small></div>
-      <div class="tarot-item"><strong>III. 女帝</strong><small>豊かさ・愛情・実り</small></div>
-      <div class="tarot-item"><strong>IV. 皇帝</strong><small>安定・責任・リーダーシップ</small></div>
-      <div class="tarot-item"><strong>V. 教皇</strong><small>伝統・助言・信頼</small></div>
-      <div class="tarot-item"><strong>VI. 恋人</strong><small>愛・選択・調和</small></div>
-      <div class="tarot-item"><strong>VII. 戦車</strong><small>前進・勝利・意志</small></div>
-      <div class="tarot-item"><strong>VIII. 力</strong><small>勇気・忍耐・自制</small></div>
-      <div class="tarot-item"><strong>IX. 隠者</strong><small>探求・内省・真理</small></div>
-      <div class="tarot-item"><strong>X. 運命の輪</strong><small>転機・好機・変化</small></div>
-      <div class="tarot-item"><strong>XI. 正義</strong><small>公平・判断・バランス</small></div>
-      <div class="tarot-item"><strong>XII. 吊るされた男</strong><small>忍耐・視点の転換・受容</small></div>
-      <div class="tarot-item"><strong>XIII. 死神</strong><small>終わり・再生・変化</small></div>
-      <div class="tarot-item"><strong>XIV. 節制</strong><small>調和・調整・癒やし</small></div>
-      <div class="tarot-item"><strong>XV. 悪魔</strong><small>執着・誘惑・束縛</small></div>
-      <div class="tarot-item"><strong>XVI. 塔</strong><small>崩壊・衝撃・解放</small></div>
-      <div class="tarot-item"><strong>XVII. 星</strong><small>希望・理想・可能性</small></div>
-      <div class="tarot-item"><strong>XVIII. 月</strong><small>不安・幻想・直感</small></div>
-      <div class="tarot-item"><strong>XIX. 太陽</strong><small>成功・喜び・活力</small></div>
-      <div class="tarot-item"><strong>XX. 審判</strong><small>目覚め・復活・決断</small></div>
-      <div class="tarot-item"><strong>XXI. 世界</strong><small>完成・達成・統合</small></div>
-    </div>
+    <p>人生の大きな転機や、心の成長を象徴する22枚です。</p>
+    <ul class="card-list">
+      <li><a href="card-fool.html"><span class="card-name">0. 愚者</span></a><span class="card-kw">自由・冒険・新しい始まり</span></li>
+      <li><a href="card-magician.html"><span class="card-name">I. 魔術師</span></a><span class="card-kw">創造・才能・行動力</span></li>
+      <li><a href="card-high-priestess.html"><span class="card-name">II. 女教皇</span></a><span class="card-kw">直感・知性・内面</span></li>
+      <li><a href="card-empress.html"><span class="card-name">III. 女帝</span></a><span class="card-kw">豊かさ・愛情・実り</span></li>
+      <li><a href="card-emperor.html"><span class="card-name">IV. 皇帝</span></a><span class="card-kw">安定・責任・リーダーシップ</span></li>
+      <li><a href="card-hierophant.html"><span class="card-name">V. 教皇</span></a><span class="card-kw">伝統・助言・信頼</span></li>
+      <li><a href="card-lovers.html"><span class="card-name">VI. 恋人</span></a><span class="card-kw">愛・選択・調和</span></li>
+      <li><a href="card-chariot.html"><span class="card-name">VII. 戦車</span></a><span class="card-kw">前進・勝利・意志</span></li>
+      <li><a href="card-strength.html"><span class="card-name">VIII. 力</span></a><span class="card-kw">勇気・忍耐・自制</span></li>
+      <li><a href="card-hermit.html"><span class="card-name">IX. 隠者</span></a><span class="card-kw">探求・内省・真理</span></li>
+      <li><a href="card-wheel-of-fortune.html"><span class="card-name">X. 運命の輪</span></a><span class="card-kw">転機・好機・変化</span></li>
+      <li><a href="card-justice.html"><span class="card-name">XI. 正義</span></a><span class="card-kw">公平・判断・バランス</span></li>
+      <li><a href="card-hanged-man.html"><span class="card-name">XII. 吊るされた男</span></a><span class="card-kw">忍耐・視点の転換・受容</span></li>
+      <li><a href="card-death.html"><span class="card-name">XIII. 死神</span></a><span class="card-kw">終わり・再生・変化</span></li>
+      <li><a href="card-temperance.html"><span class="card-name">XIV. 節制</span></a><span class="card-kw">調和・調整・癒やし</span></li>
+      <li><a href="card-devil.html"><span class="card-name">XV. 悪魔</span></a><span class="card-kw">執着・誘惑・束縛</span></li>
+      <li><a href="card-tower.html"><span class="card-name">XVI. 塔</span></a><span class="card-kw">崩壊・衝撃・解放</span></li>
+      <li><a href="card-star.html"><span class="card-name">XVII. 星</span></a><span class="card-kw">希望・理想・可能性</span></li>
+      <li><a href="card-moon.html"><span class="card-name">XVIII. 月</span></a><span class="card-kw">不安・幻想・直感</span></li>
+      <li><a href="card-sun.html"><span class="card-name">XIX. 太陽</span></a><span class="card-kw">成功・喜び・活力</span></li>
+      <li><a href="card-judgement.html"><span class="card-name">XX. 審判</span></a><span class="card-kw">目覚め・復活・決断</span></li>
+      <li><a href="card-world.html"><span class="card-name">XXI. 世界</span></a><span class="card-kw">完成・達成・統合</span></li>
+    </ul>
 
     <h2>小アルカナ｜56枚</h2>
-    <p style="text-align:center;">
-      日常生活や人間関係、感情、仕事などの具体的な出来事を象徴する56枚です。
-    </p>
-
-    <div class="card-grid">
-      <div class="tarot-item">
-        <strong>ワンド｜14枚</strong>
-        <small>情熱・行動・創造力・挑戦</small>
-        <p>エースから10、ペイジ、ナイト、クイーン、キング。</p>
-      </div>
-      <div class="tarot-item">
-        <strong>カップ｜14枚</strong>
-        <small>感情・愛情・人間関係・心</small>
-        <p>エースから10、ペイジ、ナイト、クイーン、キング。</p>
-      </div>
-      <div class="tarot-item">
-        <strong>ソード｜14枚</strong>
-        <small>思考・知性・決断・葛藤</small>
-        <p>エースから10、ペイジ、ナイト、クイーン、キング。</p>
-      </div>
-      <div class="tarot-item">
-        <strong>ペンタクル｜14枚</strong>
-        <small>お金・仕事・現実・豊かさ</small>
-        <p>エースから10、ペイジ、ナイト、クイーン、キング。</p>
-      </div>
-    </div>
+    <p>日常生活や人間関係、感情、仕事などの具体的な出来事を象徴する56枚です。</p>
+    <p><strong>ワンド｜14枚</strong>　情熱・行動・創造力・挑戦<br>
+    エースから10、ペイジ、ナイト、クイーン、キング。</p>
+    <p><strong>カップ｜14枚</strong>　感情・愛情・人間関係・心<br>
+    エースから10、ペイジ、ナイト、クイーン、キング。</p>
+    <p><strong>ソード｜14枚</strong>　思考・知性・決断・葛藤<br>
+    エースから10、ペイジ、ナイト、クイーン、キング。</p>
+    <p><strong>ペンタクル｜14枚</strong>　お金・仕事・現実・豊かさ<br>
+    エースから10、ペイジ、ナイト、クイーン、キング。</p>
 
     <h2>正位置と逆位置</h2>
     <p>
