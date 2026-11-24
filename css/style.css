@@ -468,3 +468,123 @@ footer {
     text-align: center;
   }
 }
+
+
+/* 自由入力による個別鑑定 */
+.personal-fortune {
+  max-width: 760px;
+  margin: 80px auto 20px;
+  padding: 40px 30px;
+  border: 1px solid rgba(190, 160, 255, 0.25);
+  border-radius: 20px;
+  background: linear-gradient(
+    145deg,
+    rgba(90, 65, 130, 0.20),
+    rgba(25, 20, 45, 0.75)
+  );
+  text-align: left;
+}
+
+.personal-fortune h2 {
+  text-align: center;
+}
+
+.personal-description {
+  color: #c9c1d9;
+  line-height: 1.9;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.personal-form label {
+  display: block;
+  margin: 22px 0 10px;
+  color: #e8defc;
+  font-weight: bold;
+}
+
+#fortune-question {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 16px;
+  color: #fff;
+  background: rgba(10, 8, 25, 0.8);
+  border: 1px solid rgba(190, 160, 255, 0.35);
+  border-radius: 12px;
+  font: inherit;
+  line-height: 1.7;
+  resize: vertical;
+}
+
+#fortune-question:focus {
+  outline: 2px solid #a98bdf;
+}
+
+#fortune-question::placeholder {
+  color: #898099;
+}
+
+.question-count {
+  margin-top: 8px;
+  color: #a99ebc;
+  text-align: right;
+  font-size: 12px;
+}
+
+.spread-options {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.spread-option {
+  padding: 16px 8px;
+  border: 1px solid rgba(190, 160, 255, 0.3);
+  border-radius: 12px;
+  background: rgba(10, 8, 25, 0.6);
+  color: #eee5ff;
+  cursor: pointer;
+}
+
+.spread-option strong,
+.spread-option small {
+  display: block;
+}
+
+.spread-option small {
+  margin-top: 7px;
+  color: #aaa0bd;
+  font-size: 11px;
+}
+
+.spread-option.active {
+  border-color: #c1a0ff;
+  background: rgba(145, 105, 210, 0.28);
+  box-shadow: 0 0 15px rgba(160, 120, 240, 0.15);
+}
+
+#personal-fortune-button {
+  display: block;
+  width: 100%;
+  margin-top: 28px;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+}
+
+#personal-fortune-message {
+  text-align: center;
+  color: #e8defc;
+  margin-top: 15px;
+}
+
+@media (max-width: 600px) {
+  .personal-fortune {
+    margin: 55px 12px 20px;
+    padding: 28px 18px;
+  }
+
+  .spread-options {
+    grid-template-columns: 1fr;
+  }
+}
