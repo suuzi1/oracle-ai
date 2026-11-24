@@ -6,14 +6,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#100d20">
+
   <title>ORACLE AI｜あなたの未来に、小さな光を。</title>
+
   <meta name="description" content="AIとタロットカードが、あなたの未来に小さな光を届けます。">
+
   <link rel="stylesheet" href="css/style.css">
+
+  <script src="js/app.js" defer></script>
 </head>
+
 <body>
 
   <header class="header">
     <div class="logo">✦ ORACLE AI</div>
+
     <nav>
       <a href="#about">ORACLEについて</a>
       <a href="#fortune">占いを始める</a>
@@ -21,99 +28,204 @@
   </header>
 
   <main>
+
+    <!-- メインビジュアル -->
     <section class="hero">
       <div class="moon">☾</div>
+
       <p class="eyebrow">YOUR PERSONAL AI TAROT</p>
+
       <h1>あなたの未来に、<br>小さな光を。</h1>
+
       <p class="description">
         心の中にある問いに、カードとAIがそっと寄り添います。
       </p>
-      <a class="start-button" href="#fortune">無料で占ってみる <span>→</span></a>
-      <p class="free-note">基本占いは無料でご利用いただけます</p>
-    </section>
 
-    
-<section class="fortune-section" id="fortune">
-  <p class="eyebrow">CHOOSE YOUR DESTINY</p>
-  <h2>今、知りたいことは？</h2>
-
-  <div class="fortune-cards">
-    <button class="fortune-card" data-type="love">
-      <span>♡</span>
-      <strong>恋愛運</strong>
-      <small>LOVE</small>
-    </button>
-    <button class="fortune-card" data-type="work">
-      <span>✧</span>
-      <strong>仕事運</strong>
-      <small>WORK</small>
-    </button>
-    <button class="fortune-card" data-type="money">
-      <span>☽</span>
-      <strong>金運</strong>
-      <small>MONEY</small>
-    </button>
-    <button class="fortune-card" data-type="general">
-      <span>✦</span>
-      <strong>総合運</strong>
-      <small>GENERAL</small>
-    </button>
-  </div>
-
-  <p id="selection-message">気になるテーマを選んでください。</p>
-
-  <!-- 自由入力による個別鑑定 -->
-  <div class="personal-fortune">
-    <p class="eyebrow">YOUR PERSONAL READING</p>
-    <h2>あなたのお悩みを占います。</h2>
-
-    <p class="personal-description">
-      今、心にある悩みや気になっていることを自由に書いてください。
-      あなたの相談内容に合わせて、AIがタロット鑑定を行います。
-    </p>
-
-    <div class="personal-form">
-      <label for="fortune-question">占いたいこと・相談したいこと</label>
-
-      <textarea
-        id="fortune-question"
-        placeholder="例：今の仕事を続けるべきか、転職するべきか悩んでいます。これからの仕事運について占ってください。"
-        rows="5"
-        maxlength="1000"
-      ></textarea>
-
-      <div class="question-count">
-        <span id="question-count">0</span> / 1000文字
-      </div>
-
-      <label for="personal-spread">カードの展開方法</label>
-
-      <div class="spread-options">
-        <button type="button" class="spread-option active" data-spread="1">
-          <strong>1枚引き</strong>
-          <small>今の状況とアドバイス</small>
-        </button>
-
-        <button type="button" class="spread-option" data-spread="3">
-          <strong>3枚引き</strong>
-          <small>過去・現在・未来</small>
-        </button>
-
-        <button type="button" class="spread-option" data-spread="5">
-          <strong>5枚引き</strong>
-          <small>より詳しい鑑定</small>
-        </button>
-      </div>
-
-      <button type="button" id="personal-fortune-button" class="start-button">
-        この悩みを占う <span>→</span>
-      </button>
+      <a class="start-button" href="#fortune">
+        無料で占ってみる <span>→</span>
+      </a>
 
       <p class="free-note">
-        基本鑑定は無料でご利用いただけます。
+        基本占いは無料でご利用いただけます
+      </p>
+    </section>
+
+
+    <!-- 占いセクション -->
+    <section class="fortune-section" id="fortune">
+
+      <p class="eyebrow">CHOOSE YOUR DESTINY</p>
+
+      <h2>今、知りたいことは？</h2>
+
+      <!-- テーマ別占い -->
+      <div class="fortune-cards">
+
+        <button type="button" class="fortune-card" data-type="love">
+          <span>♡</span>
+          <strong>恋愛運</strong>
+          <small>LOVE</small>
+        </button>
+
+        <button type="button" class="fortune-card" data-type="work">
+          <span>✧</span>
+          <strong>仕事運</strong>
+          <small>WORK</small>
+        </button>
+
+        <button type="button" class="fortune-card" data-type="money">
+          <span>☽</span>
+          <strong>金運</strong>
+          <small>MONEY</small>
+        </button>
+
+        <button type="button" class="fortune-card" data-type="general">
+          <span>✦</span>
+          <strong>総合運</strong>
+          <small>GENERAL</small>
+        </button>
+
+      </div>
+
+      <p id="selection-message">
+        気になるテーマを選んでください。
       </p>
 
-      <p id="personal-fortune-message" aria-live="polite"></p>
-    </div>
-  </div>
-</section>
+
+      <!-- 自由入力による個別鑑定 -->
+      <div class="personal-fortune">
+
+        <p class="eyebrow">YOUR PERSONAL READING</p>
+
+        <h2>あなたのお悩みを占います。</h2>
+
+        <p class="personal-description">
+          今、心にある悩みや気になっていることを自由に書いてください。
+          あなたの相談内容に合わせて、AIがタロット鑑定を行います。
+        </p>
+
+        <div class="personal-form">
+
+          <label for="fortune-question">
+            占いたいこと・相談したいこと
+          </label>
+
+          <textarea
+            id="fortune-question"
+            placeholder="例：今の仕事を続けるべきか、転職するべきか悩んでいます。これからの仕事運について占ってください。"
+            rows="5"
+            maxlength="1000"
+          ></textarea>
+
+          <div class="question-count">
+            <span id="question-count">0</span> / 1000文字
+          </div>
+
+          <label>
+            カードの展開方法
+          </label>
+
+          <div class="spread-options">
+
+            <button
+              type="button"
+              class="spread-option active"
+              data-spread="1"
+            >
+              <strong>1枚引き</strong>
+              <small>今の状況とアドバイス</small>
+            </button>
+
+            <button
+              type="button"
+              class="spread-option"
+              data-spread="3"
+            >
+              <strong>3枚引き</strong>
+              <small>過去・現在・未来</small>
+            </button>
+
+            <button
+              type="button"
+              class="spread-option"
+              data-spread="5"
+            >
+              <strong>5枚引き</strong>
+              <small>より詳しい鑑定</small>
+            </button>
+
+          </div>
+
+          <button
+            type="button"
+            id="personal-fortune-button"
+            class="start-button"
+          >
+            この悩みを占う <span>→</span>
+          </button>
+
+          <p class="free-note">
+            基本鑑定は無料でご利用いただけます。
+          </p>
+
+          <p
+            id="personal-fortune-message"
+            aria-live="polite"
+          ></p>
+
+        </div>
+      </div>
+
+    </section>
+
+
+    <!-- ORACLEについて -->
+    <section class="about-section" id="about">
+
+      <p class="eyebrow">ABOUT ORACLE AI</p>
+
+      <h2>カードが映す、心の小さなヒント。</h2>
+
+      <p>
+        ORACLE AIは、タロットカードとAIを組み合わせた占いサービスです。
+        引いたカードの象徴や組み合わせをもとに、
+        あなたの悩みや日々の選択に寄り添うメッセージをお届けします。
+      </p>
+
+      <p>
+        占いは未来を決めつけるものではありません。
+        自分の気持ちを見つめ、これからの一歩を考えるための
+        ヒントとしてご利用ください。
+      </p>
+
+    </section>
+
+  </main>
+
+
+  <!-- フッター -->
+  <footer class="footer">
+
+    <div class="logo">✦ ORACLE AI</div>
+
+    <p>あなたの未来に、小さな光を。</p>
+
+    <nav>
+      <a href="about.html">ORACLEについて</a>
+      <a href="ai-reading.html">AI鑑定について</a>
+      <a href="cards.html">タロットカード一覧</a>
+      <a href="faq.html">よくある質問</a>
+      <a href="privacy.html">プライバシーポリシー</a>
+      <a href="terms.html">利用規約</a>
+      <a href="operator.html">運営者情報</a>
+      <a href="contact.html">お問い合わせ</a>
+    </nav>
+
+    <p class="copyright">
+      © ORACLE AI. All Rights Reserved.
+    </p>
+
+  </footer>
+
+</body>
+</html>
