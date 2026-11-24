@@ -433,10 +433,10 @@ async function requestAI(type, results, question = "") {
   });
 
   // カード枚数の選択
-  document.querySelectorAll(".personal-form .spread-option")
+  document.querySelectorAll(".personal-fortune .spread-option")
     .forEach(button => {
       button.addEventListener("click", () => {
-        document.querySelectorAll(".personal-form .spread-option")
+        document.querySelectorAll(".personal-fortune .spread-option")
           .forEach(option => option.classList.remove("active"));
 
         button.classList.add("active");
