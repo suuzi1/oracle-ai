@@ -215,85 +215,91 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Gemini AIに鑑定を依頼
-  async function requestAI(type, results) {
-    const aiArea = document.getElementById("ai-reading");
 
-    if (!aiArea) return;
+async function requestAI(type, results, question = "") {
+  const aiArea = document.getElementById("ai-reading");
+
+  if (!aiArea) return;
+
+  aiArea.innerHTML = `
+    <div class="ai-reading-card">
+      <p class="eyebrow">ORACLE AI</p>
+      <h3>✨ あなたの運命を読み解いています</h3>
+      <p>相談内容とカードの意味を組み合わせて鑑定しています。</p>
+      <div class="ai-loading">✦　✧　✦</div>
+    </div>
+  `;
+
+  try {
+    const response = await fetch(AI_API_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        category: type,
+        question: question,
+        spread: results.length,
+        cards: results.map(result => ({
+          name: result.name,
+          position: result.position,
+          reversed: result.reversed
+        }))
+      })
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.error || "AI鑑定に失敗しました。");
+    }
+
+    if (!data.reading) {
+      throw new Error("鑑定結果を取得できませんでした。");
+    }
 
     aiArea.innerHTML = `
       <div class="ai-reading-card">
-        <p class="eyebrow">ORACLE AI</p>
-        <h3>✨ あなたの運命を読み解いています</h3>
-        <p>カードの意味を組み合わせて、AIが鑑定しています。</p>
-        <div class="ai-loading">✦　✧　✦</div>
+        <p class="eyebrow">ORACLE AI MESSAGE</p>
+        <h3>✨ AIからの鑑定メッセージ</h3>
+        <div id="ai-reading-text" class="ai-reading-text"></div>
       </div>
     `;
 
-    try {
-      const response = await fetch(AI_API_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          category: type,
-          cards: results.map(result => ({
-            name: result.name,
-            position: result.position,
-            reversed: result.reversed
-          }))
-        })
+    document.getElementById("ai-reading-text").textContent =
+      data.reading;
+
+  } catch (error) {
+    console.error("AI鑑定エラー:", error);
+
+    aiArea.innerHTML = `
+      <div class="ai-reading-card ai-error">
+        <p class="eyebrow">ORACLE AI</p>
+        <h3>AI鑑定を取得できませんでした</h3>
+        <p id="ai-error-message"></p>
+        <button id="ai-retry-button" class="start-button" type="button">
+          AI鑑定をもう一度試す
+        </button>
+      </div>
+    `;
+
+    document.getElementById("ai-error-message").textContent =
+      error.message;
+
+    document.getElementById("ai-retry-button")
+      .addEventListener("click", () => {
+        requestAI(type, results, question);
       });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || "AI鑑定に失敗しました。");
-      }
-
-      if (!data.reading) {
-        throw new Error("鑑定結果を取得できませんでした。");
-      }
-
-      aiArea.innerHTML = `
-        <div class="ai-reading-card">
-          <p class="eyebrow">ORACLE AI MESSAGE</p>
-          <h3>✨ AIからの鑑定メッセージ</h3>
-          <div id="ai-reading-text" class="ai-reading-text"></div>
-        </div>
-      `;
-
-      document.getElementById("ai-reading-text").textContent =
-        data.reading;
-
-    } catch (error) {
-      console.error("AI鑑定エラー:", error);
-
-      aiArea.innerHTML = `
-        <div class="ai-reading-card ai-error">
-          <p class="eyebrow">ORACLE AI</p>
-          <h3>AI鑑定を取得できませんでした</h3>
-          <p id="ai-error-message"></p>
-          <button id="ai-retry-button" class="start-button" type="button">
-            AI鑑定をもう一度試す
-          </button>
-        </div>
-      `;
-
-      document.getElementById("ai-error-message").textContent =
-        error.message;
-
-      document.getElementById("ai-retry-button")
-        .addEventListener("click", () => {
-          requestAI(type, results);
-        });
-    }
   }
+}
+
 
   // カードを引く
-  function drawFortune(type, count) {
+ function drawFortune(type, count, question = "") {
     try {
-      const category = fortuneTypes[type];
+      const category = type === "personal"
+  ? "お悩み相談"
+  : fortuneTypes[type];
       const spread = spreads[count];
 
       if (!category || !spread) {
@@ -383,12 +389,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
       document.getElementById("retry-button")
         .addEventListener("click", () => {
-          drawFortune(type, count);
+          drawFortune(type, count, question);
         });
 
       document.getElementById("back-button")
         .addEventListener("click", () => {
-          showSpreadOptions(type);
+          if (type === "personal") {
+  document.getElementById("fortune-question")
+    .scrollIntoView({
+      behavior: "smooth",
+      block: "center"
+    });
+} else {
+  showSpreadOptions(type);
+}
         });
 
       message.scrollIntoView({
@@ -396,7 +410,7 @@ document.addEventListener("DOMContentLoaded", () => {
         block: "center"
       });
 
-      requestAI(type, results);
+      requestAI(type, results, question);
 
     } catch (error) {
       console.error("占いエラー:", error);
@@ -404,6 +418,59 @@ document.addEventListener("DOMContentLoaded", () => {
         "占いの処理でエラーが発生しました: " + error.message;
     }
   }
+
+  // 自由入力による個別鑑定
+  let selectedPersonalSpread = 1;
+
+  const questionInput = document.getElementById("fortune-question");
+  const questionCount = document.getElementById("question-count");
+  const personalButton = document.getElementById("personal-fortune-button");
+  const personalMessage = document.getElementById("personal-fortune-message");
+
+  // 入力文字数の表示
+  questionInput.addEventListener("input", () => {
+    questionCount.textContent = questionInput.value.length;
+  });
+
+  // カード枚数の選択
+  document.querySelectorAll(".personal-form .spread-option")
+    .forEach(button => {
+      button.addEventListener("click", () => {
+        document.querySelectorAll(".personal-form .spread-option")
+          .forEach(option => option.classList.remove("active"));
+
+        button.classList.add("active");
+
+        selectedPersonalSpread = Number(button.dataset.spread);
+      });
+    });
+
+  // 自由入力占いの開始
+  personalButton.addEventListener("click", () => {
+    const question = questionInput.value.trim();
+
+    if (!question) {
+      personalMessage.textContent =
+        "占いたいことを入力してください。";
+      questionInput.focus();
+      return;
+    }
+
+    if (question.length < 5) {
+      personalMessage.textContent =
+        "もう少し詳しく入力してください。";
+      questionInput.focus();
+      return;
+    }
+
+    personalMessage.textContent = "";
+
+    drawFortune(
+      "personal",
+      selectedPersonalSpread,
+      question
+    );
+  });
 
   // 最初のテーマ選択
   cards.forEach(card => {
